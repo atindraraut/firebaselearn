@@ -20,4 +20,29 @@
         android:layout_marginBottom="339dp"
         android:text="logout" />
 
+    <TextView
+        android:id="@+id/verified"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:textSize="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="296dp"
+        android:layout_marginBottom="661dp"
+        android:text="Email not verified"
+        android:textColor="#FF0000"
+        android:visibility="gone"
+        />
+
+    <Button
+        android:id="@+id/verifybutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="121dp"
+        android:layout_marginBottom="646dp"
+        android:text="verify"
+        android:visibility="gone"/>
+
 </RelativeLayout>

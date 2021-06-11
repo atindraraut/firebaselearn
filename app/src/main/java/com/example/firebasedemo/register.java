@@ -4,23 +4,30 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class register extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
     private FirebaseAuth auth;
+    public static final String TAG = "tagg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +58,22 @@ public class register extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+
+                    FirebaseUser user = auth.getCurrentUser();
+                    user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                          Toast.makeText(register.this,"email verification link sent",Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d(TAG, "onFailure: email not sent"+e.getMessage());
+                        }
+                    });
                     Toast.makeText(register.this,"registering user successfull",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(register.this, MainActivity.class));
+                    auth.signOut();
+                    startActivity(new Intent(register.this, login.class));
                     finish();
                 }else{
                     Toast.makeText(register.this,"registering user unsuccessfull",Toast.LENGTH_SHORT).show();
