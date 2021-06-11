@@ -3,6 +3,7 @@ package com.example.firebasedemo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -51,6 +52,8 @@ public class register extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(register.this,"registering user successfull",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(register.this, MainActivity.class));
+                    finish();
                 }else{
                     Toast.makeText(register.this,"registering user unsuccessfull",Toast.LENGTH_SHORT).show();
 
