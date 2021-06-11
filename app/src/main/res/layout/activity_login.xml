@@ -14,7 +14,8 @@
         android:layout_marginBottom="12dp"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:hint="email" />
+        android:hint="email"
+        android:id="@+id/email"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -22,14 +23,16 @@
         android:layout_marginBottom="12dp"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:hint="password" />
+        android:hint="password"
+        android:id="@+id/password"/>
 
     <Button
         android:layout_width="match_parent"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         android:layout_height="wrap_content"
-        android:text="login" />
+        android:text="login"
+        android:id="@+id/login"/>
 
 
 </LinearLayout>
