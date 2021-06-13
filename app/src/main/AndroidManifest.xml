@@ -10,16 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Firebasedemo">
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".hit" />
-        <activity android:name=".login" />
-        <activity android:name=".register"></activity>
-        <activity android:name=".StartActivity">
+        <activity android:name=".login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".register"/>
     </application>
 
 </manifest>

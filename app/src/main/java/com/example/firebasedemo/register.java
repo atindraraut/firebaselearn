@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +28,7 @@ public class register extends AppCompatActivity {
     private EditText email;
     private EditText password;
     private FirebaseAuth auth;
+    private TextView signinclick;
     public static final String TAG = "tagg";
 
     @Override
@@ -34,10 +36,18 @@ public class register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        email = (EditText) findViewById(R.id.emailview);
-        password = (EditText) findViewById(R.id.passwordview);
-        Button registerbutton = (Button) findViewById(R.id.registerbutton);
+        email = findViewById(R.id.emailview);
+        password = findViewById(R.id.passwordview);
         auth = FirebaseAuth.getInstance();
+        signinclick = findViewById(R.id.signinclick);
+
+        signinclick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(register.this,login.class));
+                finish();
+            }
+        });
     }
 
     public void registerbuttonclicked(View view) {

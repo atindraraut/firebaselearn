@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 auth.signOut();
                 Toast.makeText(MainActivity.this, "loged out", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this,StartActivity.class));
+                startActivity(new Intent(MainActivity.this,login.class));
                 finish();
             }
         });
