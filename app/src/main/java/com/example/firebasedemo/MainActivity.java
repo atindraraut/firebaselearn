@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView verified;
     public static final String TAG = "tagg";
     SwipeRefreshLayout refreshlayout;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("message");
 
 
 
@@ -45,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         refreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                myRef.setValue("hello,world");
                 verifieduser();
                 refreshlayout.setRefreshing(false);
             }

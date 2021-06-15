@@ -7,6 +7,16 @@
     tools:context=".register">
 
     <EditText
+        android:id="@+id/username"
+        android:layout_width="323dp"
+        android:layout_height="58dp"
+        android:hint="username"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/emailview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
         android:id="@+id/emailview"
         android:layout_width="329dp"
         android:layout_height="80dp"
