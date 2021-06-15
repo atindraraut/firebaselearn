@@ -30,6 +30,7 @@ public class register extends AppCompatActivity {
     private FirebaseAuth auth;
     private TextView signinclick;
     public static final String TAG = "tagg";
+    private FirebaseDatabase data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

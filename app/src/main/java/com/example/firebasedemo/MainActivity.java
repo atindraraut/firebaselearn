@@ -1,8 +1,5 @@
 package com.example.firebasedemo;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private TextView verified;
     public static final String TAG = "tagg";
+    SwipeRefreshLayout refreshlayout;
 
 
 
@@ -34,6 +36,36 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         verified = findViewById(R.id.verified);
         verifybutton = findViewById(R.id.verifybutton);
+        refreshlayout =findViewById(R.id.swipetorefresh);
+
+
+
+        verifieduser();
+
+        refreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                verifieduser();
+                refreshlayout.setRefreshing(false);
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.signOut();
+                Toast.makeText(MainActivity.this, "loged out", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,login.class));
+                finish();
+            }
+        });
+
+
+    }
+
+
+
+    private void verifieduser() {
         FirebaseUser user = auth.getCurrentUser();
 
         if (!user.isEmailVerified()){
@@ -57,15 +89,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                auth.signOut();
-                Toast.makeText(MainActivity.this, "loged out", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this,login.class));
-                finish();
-            }
-        });
     }
+
 }
