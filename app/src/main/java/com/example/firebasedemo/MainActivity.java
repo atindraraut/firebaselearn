@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,8 +18,13 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView verified;
     public static final String TAG = "tagg";
     SwipeRefreshLayout refreshlayout;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
+
 
 
 
@@ -41,10 +47,13 @@ public class MainActivity extends AppCompatActivity {
         verified = findViewById(R.id.verified);
         verifybutton = findViewById(R.id.verifybutton);
         refreshlayout =findViewById(R.id.swipetorefresh);
+        ListView listView = findViewById(R.id.listview);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
 
 
 
-        verifieduser();
+//        verifieduser();
 
         refreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -62,6 +71,35 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "loged out", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this,login.class));
                 finish();
+            }
+        });
+
+        ArrayList<String> list = new ArrayList<>();
+        ArrayAdapter<String> aadapter = new ArrayAdapter<>(this, R.layout.list_view, list);
+        listView.setAdapter(aadapter);
+
+        DatabaseReference uservalue = myRef.child("users");
+        uservalue.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull  DataSnapshot snapshot) {
+                list.clear();
+                Log.d(TAG,"this is"+snapshot.toString());
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    users user = dataSnapshot.getValue(users.class);
+                    Log.d(TAG,"secondfailure"+user.getUsername());
+                    Log.d(TAG,"thirdfailure"+user.getEmail());
+                    String txt = user.getUsername()+":"+user.getEmail();
+
+                    Log.d(TAG, "onDataChange: "+txt);
+                    list.add(txt);
+                }
+                Log.d(TAG,"list failure"+list);
+                aadapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull  DatabaseError error) {
+                Log.d(TAG,"failed users");
             }
         });
 

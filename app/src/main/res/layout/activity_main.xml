@@ -21,10 +21,10 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="127dp"
-            android:layout_marginTop="322dp"
-            android:layout_marginEnd="149dp"
-            android:layout_marginBottom="339dp"
+            android:layout_marginStart="133dp"
+            android:layout_marginTop="133dp"
+            android:layout_marginEnd="142dp"
+            android:layout_marginBottom="528dp"
             android:text="logout" />
 
         <TextView
@@ -50,6 +50,24 @@
             android:layout_marginBottom="646dp"
             android:text="verify"
             android:visibility="gone" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="474dp"
+            android:id="@+id/listview"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp" />
+
+        <TextView
+            android:layout_width="176dp"
+            android:layout_height="37dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="122dp"
+            android:layout_marginBottom="479dp"
+            android:gravity="center"
+            android:text="all users" />
+
     </RelativeLayout>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
