@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
@@ -78,8 +79,10 @@ public class register extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     FirebaseUser user = auth.getCurrentUser();
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference();
+
 
                     user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -96,6 +99,7 @@ public class register extends AppCompatActivity {
                     HashMap<String,Object> map = new HashMap<>();
                     map.put("username",username);
                     map.put("email",email);
+                    map.put("isuser",1);
 
                     myRef.child("users").child(user.getUid()).setValue(map);
                     Toast.makeText(register.this,"registering user successfull",Toast.LENGTH_SHORT).show();

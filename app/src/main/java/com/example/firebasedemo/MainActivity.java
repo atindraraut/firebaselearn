@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     list.add(txt);
                 }
                 Log.d(TAG,"list failure"+list);
-                aadapter.notifyDataSetChanged();
+//                aadapter.notifyDataSetChanged();
             }
 
             @Override
