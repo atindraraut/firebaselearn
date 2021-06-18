@@ -79,7 +79,6 @@ public class register extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     FirebaseUser user = auth.getCurrentUser();
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference();
 
